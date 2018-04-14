@@ -1,0 +1,20 @@
+DATABASE = {
+	'NAME': 'led',
+	'USER': 'led',
+	'PASSWORD': 'led',
+	'HOST': 'localhost',
+	'PORT': '',
+}
+
+TWITTER = {
+	'ACTIVE': 'false',
+	'C_KEY': '',
+	'C_SECRET': '',
+	'A_TOKEN': '',
+	'A_SECRET': '',
+}
+
+TELEGRAM = {
+        'ACTIVE': 'false',
+	'A_TOKEN': '',
+}
