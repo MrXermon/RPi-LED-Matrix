@@ -17,7 +17,8 @@ CREATE TABLE IF NOT EXISTS `message` (
   `message_id` int(11) NOT NULL AUTO_INCREMENT,
   `message_text` text,
   `message_shown` tinyint(1) unsigned zerofill NOT NULL DEFAULT '0',
-  `message_duration` int(11) NOT NULL DEFAULT '3',
+  `message_duration` int(11) NOT NULL DEFAULT '5',
+  `message_from` varchar(50) DEFAULT NULL,
   `message_id_external` text,
   `provider_id` int(11) DEFAULT '1',
   PRIMARY KEY (`message_id`),
@@ -37,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `provider` (
   PRIMARY KEY (`provider_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
--- Exportiere Daten aus Tabelle led.provider: ~2 rows (ungefähr)
+-- Exportiere Daten aus Tabelle led.provider: ~3 rows (ungefähr)
 /*!40000 ALTER TABLE `provider` DISABLE KEYS */;
 INSERT INTO `provider` (`provider_id`, `provider_name`) VALUES
 	(1, 'Internal'),
