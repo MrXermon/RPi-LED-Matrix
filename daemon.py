@@ -1,7 +1,8 @@
-import configuration
 import MySQLdb
 import sys
 import time
+
+import configuration
 
 # Luma.LED_Matrix requirements
 from luma.core.interface.serial import spi, noop
@@ -30,7 +31,7 @@ with SQLcon:
 		SQLcur.execute('SET character_set_connection=utf8;')
 
 		# Grab unshown messages from DB
-		SQLcur.execute("SELECT `message_id`, `provider_name`, `message_text`, `message_duration` FROM `message` JOIN `provider` ON `message`.`provider_id` = `provider`.`provider_id` WHERE `message_shown` = 0 ORDER BY `message_id` ASC;")
+		SQLcur.execute("SELECT `message_id`, `provider_name`, `message_text`, `message_duration`, `message_from` FROM `message` JOIN `provider` ON `message`.`provider_id` = `provider`.`provider_id` WHERE `message_shown` = 0 ORDER BY `message_id` ASC;")
 
 		# Grab one message after another
 		for i in range(SQLcur.rowcount):
@@ -41,9 +42,10 @@ with SQLcon:
 					if type(SQLrow[i]) is str:
 						SQLrow[i].decode("utf-8")
 
-				# Prepare device
+				# Prepare device + message
 				device.show()
-				print "Started showing message ("+str(SQLrow[3])+"s): " + SQLrow[2] + " via " + SQLrow[1]
+				message = SQLrow[2] + " // " + SQLrow[4] + " // " + SQLrow[1]
+				print "Started showing message id=" + str(SQLrow[0]) + ", time=" + str(SQLrow[3]) + ", message=" + message
 
 				# Show message
 				with canvas(device) as draw:
@@ -55,10 +57,10 @@ with SQLcon:
 				# Turn Off and clear device
 				device.hide()
 				device.clear()
-				print "Stopped showing message: " + SQLrow[2] + " via " + SQLrow[1]
+				print "Stopped showing message id=" + str(SQLrow[0]) + ", time=" + str(SQLrow[3]) + ", message=" + message
 
 				# Set state of message to shown
-				SQLcur.execute("UPDATE `message` SET `message_shown` = 1 WHERE `message_id` = "+str(SQLrow[0])+";")
+				SQLcur.execute("UPDATE `message` SET `message_shown` = 1 WHERE `message_id` = " + str(SQLrow[0]) + ";")
 
 		# Commit to DB and prepare to restart
 		SQLcon.commit()
