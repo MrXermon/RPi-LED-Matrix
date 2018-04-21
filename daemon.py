@@ -55,7 +55,7 @@ with SQLcon:
 				print "Started showing message id=" + str(SQLrow[0]) + ", time=" + str(SQLrow[3]) + ", message=" + message
 
 				# Show message
-				show_message(device, message, fill="white", font=proportional(CP437_FONT),scroll_delay=0.02)
+				show_message(device, message, fill="white", font=proportional(CP437_FONT), scroll_delay=0.02)
 
 				# Turn Off and clear device
 				device.hide()
