@@ -17,18 +17,14 @@ CREATE TABLE IF NOT EXISTS `message` (
   `message_id` int(11) NOT NULL AUTO_INCREMENT,
   `message_text` text,
   `message_shown` tinyint(1) unsigned zerofill NOT NULL DEFAULT '0',
-  `message_duration` int(11) NOT NULL DEFAULT '5',
   `message_from` varchar(50) DEFAULT NULL,
+  `message_speed` double DEFAULT '0.02',
   `message_id_external` text,
   `provider_id` int(11) DEFAULT '1',
   PRIMARY KEY (`message_id`),
   KEY `provider_id` (`provider_id`),
   CONSTRAINT `provider_id` FOREIGN KEY (`provider_id`) REFERENCES `provider` (`provider_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- Exportiere Daten aus Tabelle led.message: ~0 rows (ungefähr)
-/*!40000 ALTER TABLE `message` DISABLE KEYS */;
-/*!40000 ALTER TABLE `message` ENABLE KEYS */;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4;
 
 -- Exportiere Struktur von Tabelle led.provider
 DROP TABLE IF EXISTS `provider`;
@@ -38,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `provider` (
   PRIMARY KEY (`provider_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
--- Exportiere Daten aus Tabelle led.provider: ~3 rows (ungefähr)
+-- Exportiere Daten aus Tabelle led.provider: ~2 rows (ungefähr)
 /*!40000 ALTER TABLE `provider` DISABLE KEYS */;
 INSERT INTO `provider` (`provider_id`, `provider_name`) VALUES
 	(1, 'Internal'),

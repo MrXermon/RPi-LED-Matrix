@@ -38,7 +38,7 @@ with SQLcon:
 		SQLcur.execute('SET character_set_connection=utf8;')
 
 		# Grab unshown messages from DB
-		SQLcur.execute("SELECT `message_id`, `provider_name`, `message_text`, `message_from` FROM `message` JOIN `provider` ON `message`.`provider_id` = `provider`.`provider_id` WHERE `message_shown` = 0 ORDER BY `message_id` ASC;")
+		SQLcur.execute("SELECT `message_id`, `provider_name`, `message_text`, `message_from`, `message_speed` FROM `message` JOIN `provider` ON `message`.`provider_id` = `provider`.`provider_id` WHERE `message_shown` = 0 ORDER BY `message_id` ASC;")
 
 		# Grab one message after another
 		for i in range(SQLcur.rowcount):
@@ -55,7 +55,7 @@ with SQLcon:
 				print "Started showing message id=" + str(SQLrow[0]) + ", time=" + str(SQLrow[3]) + ", message=" + message
 
 				# Show message
-				show_message(device, message, fill="white", font=proportional(CP437_FONT), scroll_delay=0.02)
+				show_message(device, message, fill="white", font=proportional(CP437_FONT), scroll_delay=SQLrow[4])
 
 				# Turn Off and clear device
 				device.hide()
