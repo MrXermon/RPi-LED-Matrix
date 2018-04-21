@@ -1,5 +1,6 @@
 LED = {
 	'CONTRAST': 50,
+        'MESSAGE_FORMAT': '[message] // [user] // [provider]',
 }
 
 STARTUP_MESSAGE = {
