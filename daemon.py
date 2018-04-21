@@ -53,7 +53,10 @@ with SQLcon:
 				device.show()
 				message = configuration.LED['MESSAGE_FORMAT']
 				message = message.replace('[message]', SQLrow[2])
-				message = message.replace('[user]', SQLrow[3])
+				if SQLrow[3] != None:
+					message = message.replace('[user]', SQLrow[3])
+				else:
+					message = message.replace('[user]', '')
 				message = message.replace('[provider]', SQLrow[1])
 				print "Started showing message id=" + str(SQLrow[0]) + ", time=" + str(SQLrow[3]) + ", message=" + message
 
