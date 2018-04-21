@@ -67,4 +67,4 @@ with SQLcon:
 
 		# Commit to DB and prepare to restart
 		SQLcon.commit()
-		time.sleep(2)
+		time.sleep(1)
