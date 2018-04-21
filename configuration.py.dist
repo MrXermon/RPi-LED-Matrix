@@ -1,3 +1,7 @@
+LED = {
+	'CONTRAST': 50,
+}
+
 STARTUP_MESSAGE = {
         "LED Matrix is up and running!",
         "Let's drop me a message via Telegram or Twitter!",

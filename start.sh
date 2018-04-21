@@ -1,3 +1,3 @@
 cd /opt/led/
-/usr/bin/python2.7 daemon.py
-renice -n -15 -p $(pgrep python2.7)
+/bin/sleep 2m
+/usr/bin/nice -n -15 /usr/bin/python2.7 daemon.py

@@ -17,11 +17,8 @@ from luma.core.legacy.font import proportional, CP437_FONT, TINY_FONT, SINCLAIR_
 serial = spi(port=0, device=0, gpio=noop())
 device = max7219(serial, cascaded=12, block_orientation=-90)
 
-device.contrast(10)
+device.contrast(configuration.LED['CONTRAST'])
 device.clear()
-
-# Wait until boot finished
-time.sleep(30)
 
 # Show Startup Messages
 if len(configuration.STARTUP_MESSAGE):
