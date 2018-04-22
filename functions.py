@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+
+"""
+Mapping characters against LCD font from luma.core.legacy.
+https://github.com/rm-hull/luma.core/blob/master/luma/core/legacy/font.py
+"""
 def cleanMessage(message):
         # Replace smileys
         message = message.replace('☺', chr(1))
