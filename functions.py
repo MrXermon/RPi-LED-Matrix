@@ -9,6 +9,7 @@ def cleanMessage(message):
         message = message.replace('☺', chr(1))
         message = message.replace('☻', chr(2))
         message = message.replace('♥', chr(3))
+        message = message.replace('❤', chr(3))
         message = message.replace('♦', chr(4))
         message = message.replace('♣', chr(5))
         message = message.replace('♠', chr(6))
@@ -28,4 +29,5 @@ def cleanMessage(message):
         message = message.replace('ä', chr(132))
         message = message.replace('ü', chr(129))
         message = message.replace('ö', chr(148))
+
         return message
