@@ -23,6 +23,11 @@ TWITTER = {
 	'C_SECRET': '',
 	'A_TOKEN': '',
 	'A_SECRET': '',
+        'MENTIONS': 'true',
+        'TWEETS': 'true',
+        'TWEETS_USERS': {
+                'MrXermon',
+        },
 }
 
 TELEGRAM = {
