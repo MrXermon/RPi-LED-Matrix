@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
 import MySQLdb
 import twitter
 import json
+from HTMLParser import HTMLParser
 
 import configuration
 
@@ -12,6 +14,8 @@ if configuration.TWITTER['ACTIVE'] is 'true':
 	SQLcur = SQLcon.cursor()
         SQLcur.execute('SET NAMES utf8;')
         SQLcur.execute('SET CHARACTER SET utf8;')
+
+	HTMLParser = HTMLParser()
 
 	# Setup TwitterAPI
 	TWITTERapi = twitter.Api(consumer_key=configuration.TWITTER['C_KEY'],
@@ -29,7 +33,7 @@ if configuration.TWITTER['ACTIVE'] is 'true':
 			SQLcur.execute("SELECT COUNT(*) FROM `message` WHERE `provider_id` = 2 AND `message_id_external` = '" + str(Status.id_str) + "';")
 	                if SQLcur.fetchone()[0] == 0:
                                 # Insert message to database
-                                SQLcur.execute("INSERT INTO `message` (`message_text`, `message_from`, `message_id_external`, `provider_id`) VALUES (%s, %s, %s, '2');", (Status.text, Status.user.screen_name, str(Status.id_str)))
+                                SQLcur.execute("INSERT INTO `message` (`message_text`, `message_from`, `message_id_external`, `provider_id`) VALUES (%s, %s, %s, '2');", (HTMLParser.unescape(Status.text), Status.user.screen_name, str(Status.id_str)))
 
 	if configuration.TWITTER['TWEETS'] is 'true':
 		# Loop through all Users
@@ -41,7 +45,7 @@ if configuration.TWITTER['ACTIVE'] is 'true':
 				SQLcur.execute("SELECT COUNT(*) FROM `message` WHERE `provider_id` = 2 AND `message_id_external` = '" + str(Status.id_str) + "';")
 	                        if SQLcur.fetchone()[0] == 0:
         	                        # Insert message to database
-					SQLcur.execute("INSERT INTO `message` (`message_text`, `message_from`, `message_id_external`, `provider_id`) VALUES (%s, %s, %s, '2');", (Status.text, Status.user.screen_name, str(Status.id_str)))
+					SQLcur.execute("INSERT INTO `message` (`message_text`, `message_from`, `message_id_external`, `provider_id`) VALUES (%s, %s, %s, '2');", (HTMLParser.unescape(Status.text), Status.user.screen_name, str(Status.id_str)))
 
         # Commit SQL transaction
         SQLcon.commit()

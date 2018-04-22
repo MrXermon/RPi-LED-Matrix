@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 LED = {
 	'CONTRAST': 50,
         'MESSAGE_FORMAT': '[message] // [user] // [provider]',

@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
 import MySQLdb
 import sys
 import time
+import functions
 from PIL import ImageFont
 
 import configuration
@@ -23,7 +25,7 @@ device.clear()
 # Show Startup Messages
 if len(configuration.STARTUP_MESSAGE):
 	for m in configuration.STARTUP_MESSAGE:
-		show_message(device, m, fill="white", font=proportional(CP437_FONT),scroll_delay=0.02)
+		show_message(device, m, fill="white", font=proportional(LCD_FONT),scroll_delay=0.02)
 
 # Setup DB connection
 SQLcon = MySQLdb.connect(configuration.DATABASE['HOST'], configuration.DATABASE['USER'], configuration.DATABASE['PASSWORD'], configuration.DATABASE['NAME'])
@@ -58,10 +60,13 @@ with SQLcon:
 				else:
 					message = message.replace('[user]', '')
 				message = message.replace('[provider]', SQLrow[1])
+
+				message_device = functions.cleanMessage(message)
+
 				print "Started showing message id=" + str(SQLrow[0]) + ", time=" + str(SQLrow[3]) + ", message=" + message
 
 				# Show message
-				show_message(device, message, fill="white", font=proportional(CP437_FONT), scroll_delay=SQLrow[4])
+				show_message(device, message_device, fill="white", font=proportional(CP437_FONT), scroll_delay=SQLrow[4])
 
 				# Turn Off and clear device
 				device.hide()
@@ -69,7 +74,7 @@ with SQLcon:
 				print "Stopped showing message id=" + str(SQLrow[0]) + ", time=" + str(SQLrow[3]) + ", message=" + message
 
 				# Set state of message to shown
-				SQLcur.execute("UPDATE `message` SET `message_shown` = 1 WHERE `message_id` = " + str(SQLrow[0]) + ";")
+				SQLcur.execute("UPDATE `message` SET `message_shown` = 1 WHERE `message_id` = '" + str(SQLrow[0]) + "';")
 
 		# Commit to DB and prepare to restart
 		SQLcon.commit()
