@@ -28,9 +28,8 @@ if configuration.TWITTER['ACTIVE'] is 'true':
 		for Status in TwitterMetions:
 			SQLcur.execute("SELECT COUNT(*) FROM `message` WHERE `provider_id` = 2 AND `message_id_external` = '" + str(Status.id_str) + "';")
 	                if SQLcur.fetchone()[0] == 0:
-				message = Status.text.encode('ascii',errors='ignore')
                                 # Insert message to database
-                                SQLcur.execute("INSERT INTO `message` (`message_text`, `message_from`, `message_id_external`, `provider_id`) VALUES (%s, %s, %s, '2');", (message, Status.user.screen_name, str(Status.id_str)))
+                                SQLcur.execute("INSERT INTO `message` (`message_text`, `message_from`, `message_id_external`, `provider_id`) VALUES (%s, %s, %s, '2');", (Status.text, Status.user.screen_name, str(Status.id_str)))
 
 	if configuration.TWITTER['TWEETS'] is 'true':
 		# Loop through all Users
@@ -41,9 +40,8 @@ if configuration.TWITTER['ACTIVE'] is 'true':
 			for Status in TwitterTimeline:
 				SQLcur.execute("SELECT COUNT(*) FROM `message` WHERE `provider_id` = 2 AND `message_id_external` = '" + str(Status.id_str) + "';")
 	                        if SQLcur.fetchone()[0] == 0:
-					message = Status.text.encode('ascii',errors='ignore')
         	                        # Insert message to database
-					SQLcur.execute("INSERT INTO `message` (`message_text`, `message_from`, `message_id_external`, `provider_id`) VALUES (%s, %s, %s, '2');", (message, Status.user.screen_name, str(Status.id_str)))
+					SQLcur.execute("INSERT INTO `message` (`message_text`, `message_from`, `message_id_external`, `provider_id`) VALUES (%s, %s, %s, '2');", (Status.text, Status.user.screen_name, str(Status.id_str)))
 
         # Commit SQL transaction
         SQLcon.commit()
