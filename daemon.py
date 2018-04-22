@@ -25,7 +25,7 @@ device.clear()
 # Show Startup Messages
 if len(configuration.STARTUP_MESSAGE):
 	for m in configuration.STARTUP_MESSAGE:
-		show_message(device, functions.cleanMessage(m), fill="white", font=proportional(LCD_FONT),scroll_delay=0.02)
+		show_message(device, functions.cleanMessage(m), fill="white", font=proportional(CP437_FONT),scroll_delay=0.02)
 
 # Setup DB connection
 SQLcon = MySQLdb.connect(configuration.DATABASE['HOST'], configuration.DATABASE['USER'], configuration.DATABASE['PASSWORD'], configuration.DATABASE['NAME'])
