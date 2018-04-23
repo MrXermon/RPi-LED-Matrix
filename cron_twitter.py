@@ -27,7 +27,7 @@ if configuration.TWITTER['ACTIVE'] is 'true':
 	# Grab mentions and convert to array
 	if configuration.TWITTER['MENTIONS'] is 'true':
 		# Fetch Mentions
-		TwitterMetions = TWITTERapi.GetMentions()
+		TwitterMetions = TWITTERapi.GetMentions(count=5)
 		# Check if Mentions already shown and insert into db
 		for Status in TwitterMetions:
 			SQLcur.execute("SELECT COUNT(*) FROM `message` WHERE `provider_id` = 2 AND `message_id_external` = '" + str(Status.id_str) + "';")
@@ -39,7 +39,7 @@ if configuration.TWITTER['ACTIVE'] is 'true':
 		# Loop through all Users
 		for User in configuration.TWITTER['TWEETS_USERS']:
 			# Fetch User Timeline
-			TwitterTimeline = TWITTERapi.GetUserTimeline(screen_name=User)
+			TwitterTimeline = TWITTERapi.GetUserTimeline(screen_name=User, count=5)
 			# Check if Statuses already shown and insert into db
 			for Status in TwitterTimeline:
 				SQLcur.execute("SELECT COUNT(*) FROM `message` WHERE `provider_id` = 2 AND `message_id_external` = '" + str(Status.id_str) + "';")
