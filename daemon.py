@@ -22,6 +22,8 @@ device = max7219(serial, cascaded=configuration.LED['CASCADED'], block_orientati
 device.contrast(configuration.LED['CONTRAST'])
 device.clear()
 
+# Show IP Adress
+show_message(device, functions.cleanMessage(functions.getIP()), fill="white", font=proportional(CP437_FONT),scroll_delay=0.02)
 # Show Startup Messages
 if len(configuration.STARTUP_MESSAGE):
 	for m in configuration.STARTUP_MESSAGE:
