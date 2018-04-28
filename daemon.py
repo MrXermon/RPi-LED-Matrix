@@ -17,7 +17,7 @@ from luma.core.legacy.font import proportional, CP437_FONT, TINY_FONT, SINCLAIR_
 
 # LED Matrix Setup
 serial = spi(port=0, device=0, gpio=noop())
-device = max7219(serial, cascaded=12, block_orientation=-90)
+device = max7219(serial, cascaded=configuration.LED['CASCADED'], block_orientation=configuration.LED['ORIENTATION'])
 
 device.contrast(configuration.LED['CONTRAST'])
 device.clear()

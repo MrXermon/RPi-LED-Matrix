@@ -2,6 +2,8 @@
 LED = {
 	'CONTRAST': 50,
         'MESSAGE_FORMAT': '[message] // [user] // [provider]',
+        'CASCADED': 12,
+        'ORIENTATION': -90,
 }
 
 STARTUP_MESSAGE = {
