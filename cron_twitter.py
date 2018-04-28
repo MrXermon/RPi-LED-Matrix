@@ -34,6 +34,9 @@ if configuration.TWITTER['ACTIVE'] is 'true':
 	                if SQLcur.fetchone()[0] == 0:
                                 # Insert message to database
                                 SQLcur.execute("INSERT INTO `message` (`message_text`, `message_from`, `message_id_external`, `provider_id`) VALUES (%s, %s, %s, '2');", (HTMLParser.unescape(Status.text), Status.user.screen_name, str(Status.id_str)))
+				# Like & retweet
+				TWITTERapi.CreateFavorite(status=Status)
+				TWITTERapi.PostRetweet(status_id=Status.id_str)
 
 	if configuration.TWITTER['TWEETS'] is 'true':
 		# Loop through all Users
@@ -46,6 +49,9 @@ if configuration.TWITTER['ACTIVE'] is 'true':
 	                        if SQLcur.fetchone()[0] == 0:
         	                        # Insert message to database
 					SQLcur.execute("INSERT INTO `message` (`message_text`, `message_from`, `message_id_external`, `provider_id`) VALUES (%s, %s, %s, '2');", (HTMLParser.unescape(Status.text), Status.user.screen_name, str(Status.id_str)))
+					# Like & retweet
+	                                TWITTERapi.CreateFavorite(status=Status)
+        	                        TWITTERapi.PostRetweet(status_id=Status.id_str)
 
         # Commit SQL transaction
         SQLcon.commit()
