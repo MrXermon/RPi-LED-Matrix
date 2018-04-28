@@ -22,6 +22,9 @@ RPi-LED-Matrix is a project at the HS Mainz to display messages from different s
 ### cron_twitter.py
 * Triggerd by Cronjob (every minute)
 * Connects to the Twitter API using the [python-twitter](https://github.com/bear/python-twitter) framework
+* Grabs mentions and tweets of specific accounts
+* Inserts them into the Database
+* Likes and retweets them
 ## Requirements
 ### Twitter API
 * Create twitter app via [apps.twitter.com](https://apps.twitter.com/)
