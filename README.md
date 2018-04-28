@@ -1,6 +1,6 @@
 # RPi-LED-Matrix
 ## Components
-![Uebersicht der Komponenten](/docs/Komponenten.jpg)
+![Info about the developed components](/docs/Komponenten.jpg)
 ## Requirements
 ### Python
 * Python 2.7
