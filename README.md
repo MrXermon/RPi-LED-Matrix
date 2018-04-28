@@ -1,4 +1,5 @@
 # RPi-LED-Matrix
+RPi-LED-Matrix is a project at the HS Mainz to display messages from different sources on a 8x8 LED Matrix.
 ## Components
 ![Info about the developed components](/docs/Komponenten.jpg)
 ### Database
