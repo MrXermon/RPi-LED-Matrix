@@ -21,11 +21,14 @@ if configuration.TELEGRAM['ACTIVE'] is "true":
 
 	# Do magic for all messages
 	for message in TelegramMessages['result']:
-		# Check if message already exists
-		SQLcur.execute("SELECT COUNT(*) FROM `message` WHERE `provider_id` = 3 AND `message_id_external` = '" + str(message['message']['message_id']) + "';")
-		if SQLcur.fetchone()[0] == 0:
-			# Insert message to database
-			SQLcur.execute("INSERT INTO `message` (`message_text`, `message_from`, `message_id_external`, `provider_id`) VALUES (%s, %s, %s, 3);", (message['message']['text'], message['message']['from']['username'], str(message['message']['message_id'])))
-
+		try:
+			message['message']['text'] = message['message']['text'].replace('/msg ', '')
+			# Check if message already exists
+			SQLcur.execute("SELECT COUNT(*) FROM `message` WHERE `provider_id` = 3 AND `message_id_external` = '" + str(message['message']['message_id']) + "';")
+			if SQLcur.fetchone()[0] == 0:
+				# Insert message to database
+				SQLcur.execute("INSERT INTO `message` (`message_text`, `message_from`, `message_id_external`, `provider_id`) VALUES (%s, %s, %s, 3);", (message['message']['text'], message['message']['from']['username'], str(message['message']['message_id'])))
+		except KeyError:
+			False
 	# Commit SQL transaction
 	SQLcon.commit()
