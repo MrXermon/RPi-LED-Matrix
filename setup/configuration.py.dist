@@ -27,9 +27,13 @@ TWITTER = {
 	'A_TOKEN': '',
 	'A_SECRET': '',
         'MENTIONS': 'true',
-        'TWEETS': 'true',
+        'USERS': 'true',
         'TWEETS_USERS': {
                 'MrXermon',
+        },
+        'HASHTAGS': 'true',
+        'TWEETS_HASHTAGS': {
+                '#gpn18'
         },
 }
 
