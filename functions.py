@@ -20,6 +20,7 @@ def cleanMessage(message):
         message = message.replace('◄', chr(17))
         message = message.replace('▲', chr(30))
         message = message.replace('▼', chr(31))
+        message = message.replace('…', '...')
         message = message.replace('\n', ' ')
 
         # Replace german special characters
